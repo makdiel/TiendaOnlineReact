@@ -26,15 +26,6 @@ export const ListaTipoProductos = () => {
         setDataTipo(datos);
     }
 
-    const borraTipo = async (idPost) => {
-        const url = `http://localhost:4000/api/TipoProducto/${idPost}`;
-        const response = await axios.delete(url);
-        const datos = (await response).data;
-
-        setContadorDeBorrar(contadorDeBorrar + 1);
-        console.log(contadorDeBorrar);
-    }
-
     const deleteTipo = (id) => {
         let urlDelete = `http://localhost:4000/api/TipoProducto/${id}`;
 
@@ -116,10 +107,10 @@ export const ListaTipoProductos = () => {
         let urlAxios;
 
         if (nombre_tipo === '') {
-            alertaWarning('Escriba el nombre del Tipo', 'nombre_tipo');           
-        } else {            
+            alertaWarning('Escriba el nombre del Tipo', 'nombre_tipo');
+        } else {
             payload = {
-                nombre_tipo: nombre_tipo,
+                nombre_tipo: nombre_tipo
             };
 
             if (operation === 1) {
@@ -145,6 +136,9 @@ export const ListaTipoProductos = () => {
                             <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
                                 <i className='fa-solid fa-circle-plus' /> Añadir Nuevos Tipos
                             </button>
+                            <button onClick={iniciotHandler} className='btn  btn-dark'   >
+                                <i className='fa-solid fa-circle-plus' />  Volver al inicio
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -153,7 +147,7 @@ export const ListaTipoProductos = () => {
                         <div className="card-header mb-2">
                             <p># {item.id} Tipo de Producto: {item.nombre_tipo}</p>
                             <button onClick={() => deleteTipo(item.id)} className="btn btn-outline-danger btn-sm">Borrar TipoProducto</button>
-                            <button onClick={() => openModal(2, item.id, item.nombre_tipo)} className='btn  btn-outline-warning btn-sm'  data-bs-toggle='modal' data-bs-target='#modalProducts'> Editar Tipo </button>
+                            <button onClick={() => openModal(2, item.id, item.nombre_tipo)} className='btn  btn-outline-warning btn-sm' data-bs-toggle='modal' data-bs-target='#modalProducts'> Editar Tipo </button>
                         </div>
                         <div className="card-body">
                             <blockquote className="blockquote mb-0">
@@ -180,9 +174,9 @@ export const ListaTipoProductos = () => {
                                 </div>
                             </div>
                             <div className='modal-footer'>
-                            <button onClick={() => validar()} className='btn btn-success'>
-                                <i className='fa-solid fa-floppy-disk' /> Guardar
-                            </button>
+                                <button onClick={() => validar()} className='btn btn-success'>
+                                    <i className='fa-solid fa-floppy-disk' /> Guardar
+                                </button>
                                 <button id='btnCerrarModal' className='btn btn-secondary' data-bs-dismiss='modal'>
                                     Cerrar
                                 </button>

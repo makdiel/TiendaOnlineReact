@@ -50,7 +50,7 @@ export const ListaProductos = () => {
                         </div>
                         <div className="card-body">
                             <blockquote className="blockquote mb-0">
-                                <footer className="blockquote-footer">Categoria: {item.nombre_categoria} <br></br>Tipo: {item.nombre_Tipo} <br></br>  </footer>
+                                <footer className="blockquote-footer">Categoria: {item.nombre_categoria} <br></br>Tipo Producto: {item.nombre_tipo} <br></br>  </footer>
                             </blockquote>
                         </div>
                     </div>
