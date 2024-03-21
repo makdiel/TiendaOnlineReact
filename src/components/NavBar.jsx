@@ -16,19 +16,21 @@ export const NavBar = () => {
             <Link to="/" className="nav-link" >Home</Link>
         </li>
         <li className="nav-item">
-        <Link to="/proveedores" className="nav-link" >Proveedores</Link>
+        <Link tLinko="/proveedores" className="nav-link" >Proveedores</Link>
         </li>
         <li className="nav-item">
         <Link to="/productos" className="nav-link" >Productos</Link>
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
+            Parametros
           </a>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
+            <li><a className="dropdown-item" href="/proveedores">Catalago de Proveedores</a></li>
+            <li><a className="dropdown-item" href="/categorias">Catalago de Categorias</a></li>
+            <li><a className="dropdown-item" href="/productos">Catalago de Productos</a></li>            
+            <li><a className="dropdown-item" href="/tipos">Catalago de Tipos</a></li>
+            <li><a className="dropdown-item" href="/sucursales">Catalago de Sucursales</a></li>
           </ul>
         </li>
         <li className="nav-item">

@@ -8,7 +8,9 @@ import { Contacto } from './components/Contacto';
 import { ListaProductos }   from './components/ListaProductos';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ListaProveedores } from './components/ListaProveedores';
-
+import { ListaCategorias } from './components/ListaCategorias';
+import { ListaTipoProductos } from './components/ListaTipoProductos';
+import { ListaPuntoVenta } from './components/ListaPuntosdeVenta';
 import './App.css';
 
 function App() {
@@ -21,6 +23,9 @@ function App() {
           <Route path='/contacto' element={ <Contacto/> }></Route>
           <Route path='/productos' element={ <ListaProductos/> }></Route>
           <Route path='/proveedores' element={ <ListaProveedores/> }></Route>
+          <Route path='/categorias' element={<ListaCategorias></ListaCategorias>}></Route>
+          <Route path='/tipos' element={<ListaTipoProductos></ListaTipoProductos>}></Route>
+          <Route path='/sucursales' element={<ListaPuntoVenta></ListaPuntoVenta>}></Route>
         </Routes>
         <Footer></Footer>   
       </BrowserRouter>
