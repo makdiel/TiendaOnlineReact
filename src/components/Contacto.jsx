@@ -24,7 +24,5 @@ export const Contacto = () => {
       </div>
 
     </>
-
-
   )
 }
