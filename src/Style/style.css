@@ -1,0 +1,73 @@
+.card-top{
+    max-height: 250px !important;
+}
+
+.card-top >.card-body{
+    padding: 3% !important;   
+}
+
+.card-body{
+    height: 250px !important;
+}
+img {
+    width: auto; 
+    max-height: 100%; 
+   }
+
+.mybg-gray{
+    background-color: #413e3e ;
+}
+#footer .list-group-item{
+   background-color: #413e3e !important;
+    border: none;
+    color: white;
+}
+
+.navbar-nav{
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: solid;
+    text-anchor: start;
+    -ms-text-combine-horizontal: all;
+    -webkit-text-stroke-width: medium;
+}
+
+.carousel-inner{
+    height: 800px !important;
+}
+carousel-item{
+    width: auto; 
+    max-height: 100%; 
+}
+
+.miBorde{
+    border-left: 1px solid white; 
+}
+.miBorde li a:hover{
+    text-decoration: underline;
+    color: yellow;
+} 
+.miBorde li a{
+    text-decoration: none;
+    color: white;
+}
+
+.link-top{
+    color: white; 
+
+}
+
+.link-top:hover{
+    color: blue;
+}
+/* el parametro !important sirve para que el navegador de prioridad al estilo creado y no al framework del navegador-*/
+
+
+/*//  el apartado @media permite aplicar reglas a mi pagina, en esta caso en un rango de tamaño aplicar cierto tamaño de letra  //*/
+@media(min-width:993px) and (max-width:1170px){
+    .card-top > .card-body{
+        font-size: 0.9rem !important;
+    }
+
+}
+

@@ -118,7 +118,7 @@ export const ListaCategorias = () => {
     }
 
     const iniciotHandler = () => {
-        navigate('/');
+        navigate('/Home');
     }
 
     useEffect(() => {

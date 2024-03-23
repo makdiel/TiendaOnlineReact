@@ -145,7 +145,7 @@ export const ListaProductos = () => {
     }
 
     const iniciotHandler = () => {
-        navigate('/');
+        navigate('/Home');
     }
 
     useEffect(() => {

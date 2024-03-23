@@ -7,14 +7,16 @@ import { useNavigate } from "react-router-dom";
 //import moment from 'moment';
 
 export const ListaUsuarios = () => { 
+    const navigate = useNavigate();
+  //  const [titleModal, setTitleModal] = useState('');
+  //  const [operation, setOperation] = useState(1);
+
   const [form, setForm] = useState({
     nombre_usuario : "", 
     correo_electronico : "", 
     contrasena : "", 
     nombre : "", 
-    foto_perfil : "", 
-    activo : true, 
-    id_rol : 1
+    foto_perfil : ""
    });
 
    const onChangeHandler = () => {
@@ -38,12 +40,9 @@ const submitHandler = async () => {
 
     const result  = await axios.post(url, datosFormulario);
     const resultData = (await result).data;
-    navigate('/Home')
+    navigate('/usuarios')
 }
-    const navigate = useNavigate();
-    const [titleModal, setTitleModal] = useState('');
-    const [operation, setOperation] = useState(1);
-
+   
     return (
         <>
         <div className='container mt-5' >

@@ -129,7 +129,7 @@ export const ListaProveedores = () => {
     }
 
     const iniciotHandler = () => {
-        navigate('/');
+        navigate('/Home');
     }
 
     useEffect(() => {

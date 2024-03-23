@@ -49,7 +49,7 @@ export const ListaPuntoVenta = () => {
     }
 
     const iniciotHandler = () => {
-        navigate('/');
+        navigate('/Home');
     }
 
     useEffect(() => {
