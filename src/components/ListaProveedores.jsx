@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { alertaSuccess, alertaError, alertaWarning, alertaConfirmation } from '../functions';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import moment from 'moment';
 
 export const ListaProveedores = () => {
@@ -8,6 +11,13 @@ export const ListaProveedores = () => {
     const navigate = useNavigate();
 
     const [contadorDeBorrar, setContadorDeBorrar] = useState(0);
+
+    const [id, setId] = useState('');
+    const [nombre_proveedor, setNombreProveedor] = useState('');
+    const [direccion, setDireccion] = useState('');
+    const [contacto, setContacto] = useState('');
+    const [titleModal, setTitleModal] = useState('');
+    const [operation, setOperation] = useState(1);
 
     const getDatos = async () => {
         const url = "http://localhost:4000/api/Proveedor";
@@ -17,13 +27,105 @@ export const ListaProveedores = () => {
         setDataProveedor(datos);
     }
 
-    const borraProveedor = async (idPost) => {
-        const url = `http://localhost:4000/api/Proveedor/${idPost}`;
-        const response = await axios.delete(url);
-        const datos = (await response).data;
+    const deleteProveedor = (id) => {
+        let urlDelete = `http://localhost:4000/api/Proveedor/${id}`;
 
-        setContadorDeBorrar(contadorDeBorrar + 1);
-        console.log(contadorDeBorrar);
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+            title: '¿Está seguro de eliminar el Proveedor?',
+            icon: 'question',
+            text: 'No habrá marcha atrás',
+            showCancelButton: true,
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setId(id);
+                enviarSolicitud(urlDelete, 'DELETE', {});
+            }
+        }).catch((error) => {
+            alertaError(error);
+            console.log(error);
+        });
+    }
+
+    const enviarSolicitud = async (url, metodo, parametros) => {
+        let obj = {
+            method: metodo,
+            url: url,
+            data: parametros,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        };
+        await axios(obj).then(() => {
+            let mensaje;
+            if (metodo === 'POST') {
+                mensaje = 'Se guardó el Tipo';
+            } else if (metodo === 'PUT') {
+                mensaje = 'Se editó el tipo';
+            } else if (metodo === 'DELETE') {
+                mensaje = 'Se eliminó el Tipo';
+            }
+            alertaSuccess(mensaje);
+            document.getElementById('btnCerrarModal').click();
+            getDatos();
+        }).catch((error) => {
+            alertaError(error.response.data.message);
+            console.log(error);
+        });
+    }
+
+    const openModal = (operation, id, nombre_proveedor, direccion, contacto) => {
+        setId('');
+        setNombreProveedor('');
+        setDireccion('');
+        setContacto('');
+
+
+        if (operation === 1) {
+            setTitleModal('Registrar Proveedor');
+            setOperation(1);
+        } else if (operation === 2) {
+            setTitleModal('Modificar Proveedor');
+            setId(id);
+            setNombreProveedor(nombre_proveedor);
+            setDireccion(direccion);
+            setContacto(contacto);
+            setOperation(2);
+        }
+    }
+
+    const validar = () => {
+        let payload;
+        let metodo;
+        let urlAxios;
+
+        if (nombre_proveedor === '') {
+            alertaWarning('Escriba el nombre del Proveedor', 'nombre_proveedor');
+        } else if (direccion === '') {
+            alertaWarning('Escriba la Direccion del Proveedor', 'direccion');
+        } else if (contacto === '') {
+            alertaWarning('Ingrese un Conctacto del Proveedor', 'contacto');
+        } else {
+            payload = {
+                nombre_proveedor: nombre_proveedor,
+                direccion: direccion,
+                contacto: contacto
+            };
+
+            if (operation === 1) {
+                metodo = 'POST';
+                urlAxios = 'http://localhost:4000/api/Proveedor';
+            } else {
+                metodo = 'PUT';
+                urlAxios = `http://localhost:4000/api/Proveedor/${id}`;
+            }
+
+            console.log(enviarSolicitud);
+            enviarSolicitud(urlAxios, metodo, payload);
+        }
     }
 
     const iniciotHandler = () => {
@@ -37,15 +139,19 @@ export const ListaProveedores = () => {
     return (
         <>
             <div className="container">
-                <button onClick={iniciotHandler} className="btn btn-primary  w-100" type="button" >
-                    Volver al inicio
+                <button onClick={() => openModal(1)} className='btn btn-dark w-100' data-bs-toggle='modal' data-bs-target='#modalProducts'>
+                    <i className='fa-solid fa-circle-plus' /> Añadir Nuevos Proveedores
+                </button>
+                <button onClick={iniciotHandler} className="btn btn-dark  w-100" type="button" >
+                    <i className='fa-solid fa-circle-plus' /> Volver al inicio
                 </button>
                 {dataProveedor.map((item) => (
                     <div key={item.id} className="card mt-2">
                         <div className="card-header mb-2">
-                            <p># {item.id} Nombre Proveedor: {item.nombre_proveedor}</p>                           
+                            <p># {item.id} Nombre Proveedor: {item.nombre_proveedor}</p>
                             <p>Direccion: <br></br>{item.direccion} </p>
-                            <button onClick={() => borraProveedor(item.id)} className="btn btn-outline-danger btn-sm">Borrar Proveedor</button>
+                            <button onClick={() => deleteProveedor(item.id)} className="btn btn-outline-danger btn-sm">Borrar Proveedor</button>
+                            <button onClick={() => openModal(2, item.id, item.nombre_proveedor, item.direccion,item.contacto)} className='btn  btn-outline-warning btn-sm' data-bs-toggle='modal' data-bs-target='#modalProducts'> Editar Proveedor </button>
                         </div>
                         <div className="card-body">
                             <blockquote className="blockquote mb-0">
@@ -57,6 +163,39 @@ export const ListaProveedores = () => {
                 )
                 )
                 }
+                <div id='modalProducts' className='modal fade' aria-hidden='true'>
+                    <div className='modal-dialog'>
+                        <div className='modal-content'>
+                            <div className='modal-header'>
+                                <label className='h5'>{titleModal}</label>
+                                <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='cloase' />
+                            </div>
+                            <div className='modal-body'>
+                                <input type='hidden' id='id' />
+                                <div className='input-group mb-3'>
+                                    <span className='input-group-text'><i className='fa-solid fa-gift' /></span>
+                                    <input type='text' id='nombre_proveedor' className='form-control' placeholder='nombre_proveedor' value={nombre_proveedor} onChange={(e) => setNombreProveedor(e.target.value)} />
+                                </div>
+                                <div className='input-group mb-3'>
+                                    <span className='input-group-text'><i className='fa-solid fa-gift' /></span>
+                                    <input type='text' id='direccion' className='form-control' placeholder='direccion' value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+                                </div>
+                                <div className='input-group mb-3'>
+                                    <span className='input-group-text'><i className='fa-solid fa-gift' /></span>
+                                    <input type='text' id='contacto' className='form-control' placeholder='contacto' value={contacto} onChange={(e) => setContacto(e.target.value)} />
+                                </div>
+                            </div>
+                            <div className='modal-footer'>
+                                <button onClick={() => validar()} className='btn btn-success'>
+                                    <i className='fa-solid fa-floppy-disk' /> Guardar
+                                </button>
+                                <button id='btnCerrarModal' className='btn btn-secondary' data-bs-dismiss='modal'>
+                                    Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

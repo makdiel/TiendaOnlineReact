@@ -31,7 +31,7 @@ export const ListaTipoProductos = () => {
 
         const MySwal = withReactContent(Swal);
         MySwal.fire({
-            title: '¿Está seguro de eliminar el producto?',
+            title: '¿Está seguro de eliminar el Tipo de Producto?',
             icon: 'question',
             text: 'No habrá marcha atrás',
             showCancelButton: true,
@@ -130,8 +130,8 @@ export const ListaTipoProductos = () => {
     return (
         <>
             <div className="container">
-                <div className='row mt-3'>
-                    <div className='col-md-4 offset-md-4'>
+                <div className='row mt-12'>
+                    <div className='col-md-8 offset-md-3'>
                         <div className='d-grid mx-auto'>
                             <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalProducts'>
                                 <i className='fa-solid fa-circle-plus' /> Añadir Nuevos Tipos

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { alertaSuccess, alertaError, alertaWarning, alertaConfirmation } from '../functions';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -31,7 +31,7 @@ export const ListaPuntoVenta = () => {
 
         const MySwal = withReactContent(Swal);
         MySwal.fire({
-            title: '¿Está seguro de eliminar el producto?',
+            title: '¿Está seguro de eliminar la Sucursal?',
             icon: 'question',
             text: 'No habrá marcha atrás',
             showCancelButton: true,
