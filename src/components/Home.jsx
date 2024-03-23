@@ -22,7 +22,7 @@ export const Home = () => {
 
     return (
         <>
-            <div className="card">
+            <div className="card text-bg-primary ">
                 <div className="card-body">
                 </div>
                 <h2 className="card-title"> Catalago de Productos </h2>
@@ -30,7 +30,7 @@ export const Home = () => {
             <div className="row">
                 {products.map((item) => (
                     <div className="col-sm-6 mb-3 mb-sm-0 mt-2">
-                        <div className="card">
+                        <div className="card text-bg-secondary mb-3">
                             <div className="card-body">
                                 <h5 className="card-title">Name:  {item.nombre_producto}</h5>
                                 <p className="card-text"> Precio: ${new Intl.NumberFormat('es-hn').format(item.precio)}</p>
