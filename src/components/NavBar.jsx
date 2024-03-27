@@ -40,9 +40,15 @@ export const NavBar = () => {
                   <li><a className="dropdown-item" href="/tipos">Catalago de Tipos</a></li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <Link to="/usuarios" className="nav-link" >Usuarios</Link>
-              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuarios
+                </a>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/usuarios">Nuevos Usuarios</a></li>
+                  <li><a className="dropdown-item" href="/ReporteUsuarios">Reporte de Usuarios</a></li>
+                </ul>
+              </li>              
               <li className="nav-item">
                 <Link to="/contacto" className="nav-link" >Contatanos</Link>
               </li>

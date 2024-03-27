@@ -13,8 +13,8 @@ import { ListaTipoProductos } from './components/ListaTipoProductos';
 import { ListaPuntoVenta } from './components/ListaPuntosdeVenta';
 import { InicioSesion } from './components/InicioSesion';
 import { ListaUsuarios } from './components/ListaUsuarios';
-
 import './App.css';
+import { ReporteUsuarios } from './components/ReporteUsuarios';
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
           <Route path='/tipos' element={<ListaTipoProductos></ListaTipoProductos>}></Route>
           <Route path='/sucursales' element={<ListaPuntoVenta></ListaPuntoVenta>}></Route>
           <Route path='/usuarios' element={<ListaUsuarios></ListaUsuarios>}></Route>
+          <Route path='/ReporteUsuarios' element={<ReporteUsuarios></ReporteUsuarios>}></Route>
         </Routes>
         <Footer></Footer>   
       </BrowserRouter>
